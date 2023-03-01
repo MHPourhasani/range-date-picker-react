@@ -18,7 +18,7 @@ export default function getRangeClass(
 		// if (isSameDate(date, first, checkMonth)) names.push('rmdp-range text-black bg-primary text-white rounded-md');
 		// if (isSameDate(date, first, checkMonth))
 		if (isSameDate(date, first)) {
-			names.push('bg-primary text-white rounded-md');
+			names.push('bg-primary text-white rounded-xl');
 			// names.push(oneDaySelectStyle);
 		}
 	} else if (selectedDate.length === 2) {
@@ -33,8 +33,8 @@ export default function getRangeClass(
 		if (isSameDate(date, first)) {
 			// return startRangeDayStyle;
 			// names.push({ startRangeDayStyle: startRangeDayStyle });
-			names.push('start');
-			// names.push('bg-primary text-white rounded-r-md');
+			// names.push('start');
+			names.push('bg-primary text-white rounded-r-xl');
 		}
 
 		// if (isSameDate(date, second, checkMonth, endRangeDayStyle))
@@ -42,17 +42,10 @@ export default function getRangeClass(
 		if (isSameDate(date, second)) {
 			// return endRangeDayStyle + 'rounded-l-m';
 			// names.push({ endRangeDayStyle: endRangeDayStyle });
-			names.push('end');
-			// names.push('bg-primary text-white rounded-l-md');
+			// names.push('end');
+			names.push('bg-primary text-white rounded-l-xl');
 		}
 	}
 
-	// console.log(startRangeDayStyle);
-	// console.log(endRangeDayStyle);
-	// console.log(names.join(' '));
-	// return names.join(' ');
-	return names.join(' ')
-		// names.join(' ') + ' ' + rangeDateStyle + ' ' + startRangeDayStyle + ' ' + endRangeDayStyle
-	
-	// return names;
+	return names.join(' ');
 }

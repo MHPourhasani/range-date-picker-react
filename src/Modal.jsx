@@ -97,7 +97,6 @@ const Modal = ({ value, setValue }) => {
 											onChange={setValue}
 											locale={locale}
 											calendar={calendar}
-											range
 											rangeHover
 											numberOfMonths={2}
 											maxDate={new Date()}
@@ -111,7 +110,7 @@ const Modal = ({ value, setValue }) => {
 										/>
 
 										<div>
-											<span className='flex flex-col gap-3'>
+											<span className='flex flex-col gap-3 text-14'>
 												{buttons.map((button, index) => (
 													<button
 														key={index}
@@ -123,7 +122,7 @@ const Modal = ({ value, setValue }) => {
 
 											<button
 												onClick={closeModal}
-												className='mt-7 w-44 rounded-[5px] bg-secondary800 py-3 text-white ease-in hover:bg-secondary900'>
+												className='mt-7 w-44 rounded-[5px] bg-secondary800 py-3 font-medium text-white ease-in hover:bg-secondary900'>
 												اعمال
 											</button>
 										</div>

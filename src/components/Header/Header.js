@@ -6,21 +6,13 @@ const Header = ({
 	value,
 	state,
 	setState,
-	disableYearPicker,
-	disableMonthPicker,
-	buttons,
-	renderButton,
 	handleMonthChange,
 	disabled,
-	hideMonth,
 	onChange,
-	hideYear,
 	monthAndYears: [months, years],
 }) => {
 	let {
 			date,
-			onlyMonthPicker,
-			onlyYearPicker,
 			mustShowYearPicker,
 			minDate,
 			maxDate,
@@ -80,16 +72,12 @@ const Header = ({
 	function increaseValue(value) {
 		if (disabled || (value < 0 && isPreviousDisable) || (value > 0 && isNextDisable)) return;
 
-		if (!mustShowYearPicker && !onlyYearPicker) {
+		if (!mustShowYearPicker) {
 			date.toFirstOfMonth();
 
-			if (onlyMonthPicker) {
-				date.year += value;
-			} else {
-				date.month += value;
+			date.month += value;
 
-				handleMonthChange(date);
-			}
+			handleMonthChange(date);
 		} else {
 			year = year + value * 12;
 
@@ -97,45 +85,10 @@ const Header = ({
 			if (value > 0 && maxDate && year > maxDate.year) year = maxDate.year;
 		}
 
-		// if (fullYear) {
-		// 	date.year += value;
-		// } else if (!mustShowYearPicker && !onlyYearPicker) {
-		// 	date.toFirstOfMonth();
-
-		// 	if (onlyMonthPicker) {
-		// 		date.year += value;
-		// 	} else {
-		// 		date.month += value;
-
-		// 		handleMonthChange(date);
-		// 	}
-		// } else {
-		// 	year = year + value * 12;
-
-		// 	if (value < 0 && minDate && year < minDate.year) year = minDate.year;
-		// 	if (value > 0 && maxDate && year > maxDate.year) year = maxDate.year;
-		// }
-
 		setState({
 			...state,
 			date,
 			year,
-		});
-	}
-
-	function toggle(picker) {
-		if (disabled) return;
-
-		let object = {
-			mustShowMonthPicker: false,
-			mustShowYearPicker: false,
-		};
-
-		object[picker] = !state[picker];
-
-		setState({
-			...state,
-			...object,
 		});
 	}
 };

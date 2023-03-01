@@ -18,7 +18,6 @@ function Calendar(
 		calendar,
 		locale,
 		format,
-		range = false,
 		className,
 		months,
 		children,
@@ -46,7 +45,8 @@ function Calendar(
 	},
 	outerRef
 ) {
-	const numberOfMonths = 2;
+	const numberOfMonths = 2,
+		range = true;
 
 	if (currentDate && !(currentDate instanceof DateObject)) {
 		currentDate = undefined;

@@ -20,7 +20,6 @@ const DayPicker = ({
 	numberOfMonths,
 	handleFocusedDate,
 	monthAndYears: [monthNames],
-	displayWeekNumbers,
 	rangeHover,
 	todayStyle,
 	allDayStyles,
@@ -215,7 +214,7 @@ const DayPicker = ({
 						state={state}
 						customWeekDays={weekDays}
 						weekStartDayIndex={weekStartDayIndex}
-						className='mb-3 flex w-full items-center justify-between text-11 font-medium text-primary'
+						className='flex w-full items-center justify-between text-11 font-medium text-primary'
 					/>
 
 					{weeks.map((week, index) => (
