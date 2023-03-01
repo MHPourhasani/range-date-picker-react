@@ -218,6 +218,7 @@ function Calendar(
 	}, [ref.current.isReady, onReady]);
 
 	let globalProps = {
+			value,
 			state,
 			setState,
 			onChange: handleChange,

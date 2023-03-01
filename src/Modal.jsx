@@ -4,8 +4,6 @@ import { Dialog, Transition } from '@headlessui/react';
 // icons
 import { ReactComponent as CloseBtn } from './assets/svg/close.svg';
 
-import persian from 'react-date-object/calendars/persian';
-import persian_fa from 'react-date-object/locales/persian_fa';
 import Calendar from './components/Calendar/Calendar';
 
 const buttons = [
@@ -19,9 +17,7 @@ const buttons = [
 ];
 
 const Modal = ({ value, setValue }) => {
-	let [isOpen, setIsOpen] = useState(false),
-		calendar = persian,
-		locale = persian_fa;
+	let [isOpen, setIsOpen] = useState(false);
 
 	const closeModal = () => {
 		setIsOpen(false);
@@ -59,7 +55,7 @@ const Modal = ({ value, setValue }) => {
 					</Transition.Child>
 
 					<div className='fixed inset-0'>
-						<div className='flex min-h-full items-center justify-center p-4 text-center'>
+						<div className='flex items-center justify-center p-4 text-center'>
 							<Transition.Child
 								as={Fragment}
 								enter='ease-out duration-300'
@@ -70,7 +66,7 @@ const Modal = ({ value, setValue }) => {
 								leaveTo='opacity-0 scale-95'>
 								<Dialog.Panel
 									dir='rtl'
-									className='shadow-xl w-9/12 transform gap-16 rounded-2xl bg-white p-6 transition-all'>
+									className='shadow-xl flex w-9/12 flex-col gap-14 rounded-2xl bg-white p-6 transition-all'>
 									<div className='flex w-full items-center justify-between'>
 										<span className='text-18 font-bold text-secondary800'>
 											انتخاب بازه زمانی

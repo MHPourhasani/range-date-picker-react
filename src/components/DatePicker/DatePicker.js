@@ -44,7 +44,6 @@ function DatePicker(
 		hideOnScroll,
 		minDate,
 		maxDate,
-		formattingIgnoreList,
 		containerClassName = '',
 		calendarPosition = 'bottom-left',
 		editable = true,
@@ -59,7 +58,6 @@ function DatePicker(
 		digits,
 		onFocusedDateChange,
 		type,
-		weekPicker,
 		onOpenPickNewDate = true,
 		mobileButtons = [],
 		...otherProps
@@ -117,10 +115,8 @@ function DatePicker(
 		calendar = persian,
 		locale = persian_fa;
 
-	if (isMobileMode && !ref.current.mobile) ref.current = { ...ref.current, mobile: true };
 	if (!isMobileMode && ref.current.mobile) ref.current = { ...ref.current, mobile: false };
 
-	formattingIgnoreList = stringify(formattingIgnoreList);
 	format = getFormat(format);
 
 	[calendar, locale] = check(calendar, locale);
@@ -188,7 +184,6 @@ function DatePicker(
 				digits,
 				locale,
 				format,
-				ignoreList: JSON.parse(formattingIgnoreList),
 			});
 
 			return date;
@@ -229,7 +224,7 @@ function DatePicker(
 		} else {
 			setDate(date);
 		}
-	}, [value, calendar, locale, format, range, weekDays, months, digits, formattingIgnoreList]);
+	}, [value, calendar, locale, format, range, weekDays, months, digits]);
 
 	useEffect(() => {
 		/**
@@ -351,13 +346,10 @@ function DatePicker(
 				digits={digits}
 				minDate={minDate}
 				maxDate={maxDate}
-				formattingIgnoreList={JSON.parse(formattingIgnoreList)}
-				onPropsChange={onPropsChange}
 				onReady={setCalendarReady}
 				DatePicker={datePickerRef.current}
 				datePickerProps={datePickerProps}
 				onFocusedDateChange={handleFocusedDate}
-				weekPicker={weekPicker}
 				{...otherProps}>
 				{children}
 				{isMobileMode && renderButtons()}
@@ -398,7 +390,6 @@ function DatePicker(
 				months,
 				weekDays,
 				digits,
-				ignoreList: JSON.parse(formattingIgnoreList),
 			});
 
 			if ((!minDate || date > minDate) && (!maxDate || date < maxDate)) {
@@ -446,7 +437,6 @@ function DatePicker(
 				calendar,
 				locale,
 				format,
-				ignoreList: JSON.parse(formattingIgnoreList),
 			};
 
 		digits = isArray(digits) ? digits : locale.digits;

@@ -5,6 +5,7 @@ import YearPicker from '../YearPicker/YearPicker';
 import MonthPicker from '../MonthPicker/MonthPicker';
 
 const Header = ({
+	value,
 	state,
 	setState,
 	disableYearPicker,
@@ -39,7 +40,7 @@ const Header = ({
 	maxYear = maxYear - 12 * Math.floor((maxYear - year) / 12);
 
 
-	// if (mustShowYearPicker || onlyYearPicker) {
+	// if (mustShowYearPicker) {
 	// 	let minYear = maxYear - 11;
 
 	// 	isPreviousDisable = minDate && minDate.year > minYear;

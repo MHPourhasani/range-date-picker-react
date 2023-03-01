@@ -12,14 +12,15 @@ import { ReactComponent as ArrowDown } from '../../assets/svg/arrow-down.svg';
 import styles from './YearPicker.module.css';
 
 const YearPicker = ({ state, onChange, handleFocusedDate, onYearChange }) => {
-	const { date, today, minDate, maxDate,selectedDate, onlyShowInRangeDates, year } = state,
+	const { date, today, minDate, maxDate, selectedDate, onlyShowInRangeDates, year } = state,
 		digits = date.digits;
 
 	const [selectedYear, setSelectedYear] = useState(today.year);
-
 	let minYear = today.year - 4;
 
 	minYear = minYear - 12 * Math.ceil((minYear - year) / 12);
+
+	console.log(state);
 
 	const notInRange = (year) => {
 		return (minDate && year < minDate.year) || (maxDate && year > maxDate.year);
@@ -49,7 +50,7 @@ const YearPicker = ({ state, onChange, handleFocusedDate, onYearChange }) => {
 			date = date.setMonth(maxDate.monthIndex + 1);
 		}
 
-		onChange( undefined, {
+		onChange(undefined, {
 			...state,
 			date,
 			focused,
@@ -68,8 +69,7 @@ const YearPicker = ({ state, onChange, handleFocusedDate, onYearChange }) => {
 
 		if (today.year === year) names.push('rmdp-today text-primary'); // text-primary
 
-			if (year === date.year) names.push('rmdp-selected bg-primary text-white rounded-md');
-	
+		if (year === date.year) names.push('rmdp-selected bg-primary text-white rounded-md');
 
 		return names.join(' ');
 	};

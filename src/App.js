@@ -24,7 +24,9 @@ const App = () => {
 		<div
 			dir='rtl'
 			className='flex h-screen w-full flex-col items-center justify-center bg-secondary400 font-iranyekan'>
-			<section className='w-7/12 rounded-xl bg-white p-6'>
+			<section className='rounded-xl bg-white px-6 py-2'>
+				<Modal value={value} setValue={setValue} />
+
 				<section className='flex items-start justify-between gap-5'>
 					<div className='flex flex-col'>
 						{/* <Calendar
@@ -48,8 +50,6 @@ const App = () => {
 							// endRangeDayStyle='bg-primary'
 						/> */}
 					</div>
-
-					<Modal value={value} setValue={setValue} />
 
 					{/* <div className='flex flex-col items-stretch justify-between text-14'>
 						<span className='flex flex-col gap-3'>
