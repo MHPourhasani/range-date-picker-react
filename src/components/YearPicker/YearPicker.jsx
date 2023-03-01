@@ -67,9 +67,9 @@ const YearPicker = ({ state, onChange, handleFocusedDate, onYearChange }) => {
 
 		if (names.includes('text-secondary400') && onlyShowInRangeDates) return; // rmdp-disabled
 
-		if (today.year === year) names.push('rmdp-today text-primary'); // text-primary
+		if (today.year === year) names.push('text-primary'); // rmdp-today
 
-		if (year === date.year) names.push('rmdp-selected bg-primary text-white rounded-md');
+		if (year === date.year) names.push('text-primary'); // rmdp-selected
 
 		return names.join(' ');
 	};

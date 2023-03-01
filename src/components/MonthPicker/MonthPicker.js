@@ -191,11 +191,9 @@ export default function MonthPicker({
 			// names.push('rmdp-disabled text-gray-400');
 			names.push('text-disable');
 
-		// if (names.includes('rmdp-disabled text-gray-400') && onlyShowInRangeDates) return;
-		if (names.includes('text-disable') && onlyShowInRangeDates) return;
+		if (names.includes('text-disable') && onlyShowInRangeDates) return; // rmdp-disabled
 
-		// if (isSameDate(today, dateObject, true)) names.push('rmdp-today text-primary');
-		if (isSameDate(today, dateObject, true)) names.push('text-primary');
+		if (isSameDate(today, dateObject, true)) names.push('text-primary'); // rmdp-today
 
 		// if (!range) {
 		// 	if ([].concat(selectedDate).some((date) => isSameDate(date, dateObject, true)))

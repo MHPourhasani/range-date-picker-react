@@ -151,39 +151,12 @@ function Calendar(
 				calendar,
 				locale,
 				format,
-				dayStyles,
-				allDayStyles,
-				todayStyle,
-				calendarStyle,
-				oneDaySelectStyle,
 				mustSortDates,
-				rangeDateStyle,
 				year: date.year,
 				today: state.today || new DateObject({ calendar }),
-				weekPicker,
-				startRangeDayStyle,
-				endRangeDayStyle,
 			};
 		});
-	}, [
-		value,
-		calendar,
-		locale,
-		format,
-		range,
-		sort,
-		numberOfMonths,
-		digits,
-		calendarStyle,
-		oneDaySelectStyle,
-		weekPicker,
-		todayStyle,
-		dayStyles,
-		allDayStyles,
-		rangeDateStyle,
-		startRangeDayStyle,
-		endRangeDayStyle,
-	]);
+	}, [value, calendar, locale, format, range, sort, numberOfMonths, digits]);
 
 	useEffect(() => {
 		if (!minDate && !maxDate) return;

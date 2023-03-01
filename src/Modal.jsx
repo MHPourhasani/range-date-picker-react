@@ -5,9 +5,16 @@ import { Dialog, Transition } from '@headlessui/react';
 import { ReactComponent as CloseBtn } from './assets/svg/close.svg';
 
 import Calendar from './components/Calendar/Calendar';
+import persian from 'react-date-object/calendars/persian';
+import persian_fa from 'react-date-object/locales/persian_fa';
+import DatesProvider, { useDates } from './Providers/SelectedDatesProvider';
+
+// icons
+import { ReactComponent as CalendarIcon } from './assets/svg/calendar.svg';
+import { ReactComponent as ArrowDownBtn } from './assets/svg/arrow-down-button.svg';
 
 const buttons = [
-	'5 دقیقه اخیر',
+	// { title: '5 دقیقه اخیر', onClick:  },
 	'15 دقیقه اخیر',
 	'نیم ساعت اخیر',
 	'یک ساعت اخیر',
@@ -17,7 +24,11 @@ const buttons = [
 ];
 
 const Modal = ({ value, setValue }) => {
-	let [isOpen, setIsOpen] = useState(false);
+	let [isOpen, setIsOpen] = useState(false),
+		calendar = persian,
+		locale = persian_fa;
+
+	// const { dates } = useDates();
 
 	const closeModal = () => {
 		setIsOpen(false);
@@ -28,13 +39,16 @@ const Modal = ({ value, setValue }) => {
 	};
 
 	return (
-		<section>
-			<div className='flex h-12 items-center justify-center'>
+		<DatesProvider>
+			<div className='flex items-center justify-center'>
 				<button
 					type='button'
+					// value={dates.startDate}
 					onClick={openModal}
-					className='rounded-md text-16 font-medium focus:outline-none'>
-					Open dialog
+					className='flex h-12 w-[198px] items-center justify-center gap-2 rounded-md text-16 font-medium focus:outline-none'>
+					<CalendarIcon />
+					<span>بازه دلخواه</span>
+					<ArrowDownBtn />
 				</button>
 			</div>
 
@@ -81,6 +95,8 @@ const Modal = ({ value, setValue }) => {
 										<Calendar
 											value={value}
 											onChange={setValue}
+											locale={locale}
+											calendar={calendar}
 											range
 											rangeHover
 											numberOfMonths={2}
@@ -107,7 +123,7 @@ const Modal = ({ value, setValue }) => {
 
 											<button
 												onClick={closeModal}
-												className='mt-7 w-44 rounded-[5px] bg-secondary800 py-3 text-white'>
+												className='mt-7 w-44 rounded-[5px] bg-secondary800 py-3 text-white ease-in hover:bg-secondary900'>
 												اعمال
 											</button>
 										</div>
@@ -118,7 +134,7 @@ const Modal = ({ value, setValue }) => {
 					</div>
 				</Dialog>
 			</Transition>
-		</section>
+		</DatesProvider>
 	);
 };
 

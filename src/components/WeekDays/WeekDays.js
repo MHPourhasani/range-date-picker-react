@@ -45,7 +45,7 @@ export default function WeekDays({
 	return (
 		<div className={className}>
 			{weekDays.map((weekDay, index) => (
-				<div key={index} className='flex flex-col justify-center'>
+				<div key={index} className='flex h-12 w-12 items-center justify-center'>
 					{weekDay}
 				</div>
 			))}

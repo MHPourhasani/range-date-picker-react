@@ -1,6 +1,4 @@
-import { isValidElement, cloneElement } from 'react';
 import Arrow from '../Arrow/Arrow';
-import { FiChevronDown } from 'react-icons/fi';
 import YearPicker from '../YearPicker/YearPicker';
 import MonthPicker from '../MonthPicker/MonthPicker';
 
@@ -19,8 +17,7 @@ const Header = ({
 	hideYear,
 	monthAndYears: [months, years],
 }) => {
-	let style = {},
-		{
+	let {
 			date,
 			onlyMonthPicker,
 			onlyYearPicker,
@@ -39,7 +36,6 @@ const Header = ({
 
 	maxYear = maxYear - 12 * Math.floor((maxYear - year) / 12);
 
-
 	// if (mustShowYearPicker) {
 	// 	let minYear = maxYear - 11;
 
@@ -55,23 +51,20 @@ const Header = ({
 	return (
 		// rmdp-header
 		<div className='flex h-10 w-full items-center justify-between text-14 font-bold'>
-			<div className='relative flex w-full justify-between'>
-				{months.map((month, index) => (
-					<div
-						key={index}
-						// className='rmdp-header-values flex items-center justify-between pl-1'
-						className='flex w-full items-center justify-between'
-						style={style}>
-						{getButton('left')}
-						{/* <span className={`flex w-32 cursor-pointer items-center justify-between`}>
+			{months.map((month) => (
+				<div
+					key={month}
+					// rmdp-header-values
+					className='flex w-full items-center justify-between'>
+					{getButton('left')}
+					{/* <span className={`flex w-32 cursor-pointer items-center justify-between`}>
 							{month}
 						</span> */}
-						<MonthPicker state={state} onChange={onChange} />
-						<YearPicker state={state} onChange={onChange} />
-						{getButton('right')}
-					</div>
-				))}
-			</div>
+					<MonthPicker state={state} onChange={onChange} />
+					<YearPicker state={state} onChange={onChange} />
+					{getButton('right')}
+				</div>
+			))}
 		</div>
 	);
 

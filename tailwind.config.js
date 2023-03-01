@@ -19,6 +19,7 @@ module.exports = {
 			secondary400: '#A0A3BD',
 			secondary600: '#4E4B66',
 			secondary800: '#14142A',
+			secondary900: '#040412',
 		},
 		borderWidth: { 1: '1px', 1.5: '1.5px' },
 		boxShadow: {

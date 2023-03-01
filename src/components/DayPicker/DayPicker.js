@@ -203,9 +203,7 @@ const DayPicker = ({
 			second: selectedDate?.second || second,
 		});
 
-		if (numberOfMonths === 1 && !current) {
-			date = new DateObject(date).toFirstOfMonth();
-		} else if (numberOfMonths > 1 && !current) {
+		if (numberOfMonths > 1 && !current) {
 			if (monthIndex === 0 && dateObject < date) {
 				date = new DateObject(date).toFirstOfMonth();
 			}
@@ -251,7 +249,7 @@ const DayPicker = ({
 						<div
 							key={index}
 							// هر هفته
-							className='flex w-full items-center justify-center py-0.5'>
+							className='flex w-full items-center justify-center'>
 							{week.map((object, i) => {
 								//To clear the properties which are added from the previous render
 								object = {

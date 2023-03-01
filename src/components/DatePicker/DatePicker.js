@@ -27,9 +27,6 @@ function DatePicker(
 		format,
 		onChange,
 		name,
-		id,
-		title,
-		placeholder,
 		required,
 		style = {},
 		className = '',
@@ -74,7 +71,6 @@ function DatePicker(
 		calendarRef = useRef(),
 		ref = useRef({}),
 		datePickerProps = arguments[0],
-		isMobileMode = isMobile(),
 		closeCalendar = useCallback(() => {
 			if (onClose?.() === false) return;
 
@@ -114,8 +110,6 @@ function DatePicker(
 		],
 		calendar = persian,
 		locale = persian_fa;
-
-	if (!isMobileMode && ref.current.mobile) ref.current = { ...ref.current, mobile: false };
 
 	format = getFormat(format);
 
@@ -263,12 +257,12 @@ function DatePicker(
 			ref={setRef}
 			element={renderInput()}
 			popper={isVisible && renderCalendar()}
-			active={!isMobileMode && isCalendarReady}
+			active={isCalendarReady}
 			position={calendarPosition}
-			arrow={!isMobileMode && arrow}
+			arrow={arrow}
 			fixMainPosition={!scrollSensitive || fixMainPosition}
 			zIndex={zIndex}
-			onChange={!isMobileMode && onPositionChange}
+			onChange={onPositionChange}
 			containerClassName={`rmdp-container ${containerClassName}`}
 			className='w-[395px]'
 			{...otherProps}
@@ -313,18 +307,14 @@ function DatePicker(
 					ref={inputRef}
 					type='text'
 					name={name}
-					id={id}
-					title={title}
 					required={required}
 					onFocus={openCalendar}
 					className={inputClass || 'rmdp-input'}
-					placeholder={placeholder}
 					value={stringDate}
 					onChange={handleValueChange}
 					style={style}
-					autoComplete='off'
 					disabled={disabled ? true : false}
-					inputMode={inputMode || (isMobileMode ? 'none' : undefined)}
+					inputMode={inputMode}
 				/>
 			);
 		}
@@ -340,7 +330,7 @@ function DatePicker(
 				calendar={calendar}
 				locale={locale}
 				format={format}
-				className={className + (isMobileMode ? ' rmdp-mobile' : '')}
+				className={className}
 				weekDays={weekDays}
 				months={months}
 				digits={digits}
@@ -352,7 +342,7 @@ function DatePicker(
 				onFocusedDateChange={handleFocusedDate}
 				{...otherProps}>
 				{children}
-				{isMobileMode && renderButtons()}
+				{renderButtons()}
 			</Calendar>
 		);
 	}
@@ -402,7 +392,7 @@ function DatePicker(
 
 		let input = getInput(inputRef);
 
-		if (isMobileMode && input) input.blur();
+		if (input) input.blur();
 
 		if (input || !isVisible) {
 			setIsVisible(true);
@@ -412,11 +402,11 @@ function DatePicker(
 	}
 
 	function mustPickNewDate() {
-		return onOpenPickNewDate && !value && !ref.current.date && !range && !isMobileMode;
+		return onOpenPickNewDate && !value && !ref.current.date && !range;
 	}
 
 	function handleChange(date, force) {
-		if (isMobileMode && !force) return setTemporaryDate(date);
+		if (!force) return setTemporaryDate(date);
 
 		setDate(date);
 
@@ -486,8 +476,6 @@ function DatePicker(
 	function setCalendarReady() {
 		setIsCalendarReady(true);
 
-		if (!isMobileMode) return;
-
 		let popper = calendarRef.current.parentNode.parentNode;
 
 		popper.className = 'rmdp-calendar-container-mobile';
@@ -500,7 +488,7 @@ function DatePicker(
 	}
 
 	function handleFocusedDate(focusedDate, clickedDate) {
-		if (!isArray(ref.current.date) && clickedDate && !isMobileMode) {
+		if (!isArray(ref.current.date) && clickedDate) {
 			closeCalendar();
 		}
 
