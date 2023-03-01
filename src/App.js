@@ -23,7 +23,7 @@ const App = () => {
 	return (
 		<div
 			dir='rtl'
-			className='flex h-screen w-full flex-col items-center justify-center bg-secondary400 font-iranyekan'>
+			className='flex h-screen w-full flex-col items-center justify-center bg- font-iranyekan'>
 			<section className='rounded-xl bg-white px-6 py-2'>
 				<Modal value={value} setValue={setValue} />
 

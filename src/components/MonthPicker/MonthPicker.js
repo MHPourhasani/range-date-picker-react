@@ -80,29 +80,6 @@ export default function MonthPicker({
 		return monthsArray;
 	}, [calendar, locale, customMonths, state.date.year, state.date._format]);
 
-	// return (
-	// 	<div
-	// 		// rmdp-month-picker
-	// 		className={`absolute top-0 flex h-10 flex-col items-center rounded-md bg-white text-14 ${
-	// 			mustShowMonthPicker ? 'flex' : 'hidden'
-	// 		}`}
-	// 		onMouseLeave={() => rangeHover && setDateHovered()}>
-	// 		{months.map((month, i) => (
-	// 			<div key={i} className='rmdp-ym gap-10'>
-	// 				{month.map(({ date, name }, j) => (
-	// 					<div
-	// 						key={j}
-	// 						className={`${getClassName(date)}`}
-	// 						onClick={() => selectMonth(date)}
-	// 						onMouseEnter={() => rangeHover && setDateHovered(date)}>
-	// 						<span className={''}>{name}</span>
-	// 					</div>
-	// 				))}
-	// 			</div>
-	// 		))}
-	// 	</div>
-	// );
-
 	return (
 		<div>
 			<Listbox
@@ -151,7 +128,6 @@ export default function MonthPicker({
 			</Listbox>
 		</div>
 	);
-	// };
 
 	function selectMonth(dateObject) {
 		let { selectedDate, focused } = state,

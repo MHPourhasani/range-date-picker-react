@@ -82,7 +82,7 @@ const YearPicker = ({ state, onChange, handleFocusedDate, onYearChange }) => {
 				<Listbox.Button
 					value={selectedDate.year !== today.year ? selectedDate.year : selectedYear}
 					className='relative flex w-auto cursor-pointer items-center gap-5 bg-white py-2 text-15'>
-					<span className='block'>
+					<span>
 						{selectedDate.year !== today.year ? selectedDate.year : selectedYear}
 					</span>
 					<ArrowDown />

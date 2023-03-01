@@ -45,7 +45,7 @@ const Modal = ({ value, setValue }) => {
 					type='button'
 					// value={dates.startDate}
 					onClick={openModal}
-					className='flex h-12 w-[198px] items-center justify-center gap-2 rounded-md text-16 font-medium focus:outline-none'>
+					className='flex h-12 w-[198px] items-center justify-center gap-2 rounded-xl border-1 text-16 font-medium focus:outline-none'>
 					<CalendarIcon />
 					<span>بازه دلخواه</span>
 					<ArrowDownBtn />
@@ -65,7 +65,7 @@ const Modal = ({ value, setValue }) => {
 						leave='ease-in duration-200'
 						leaveFrom='opacity-100'
 						leaveTo='opacity-0'>
-						<div className='bg-black fixed inset-0 bg-opacity-25' />
+						<div className='fixed inset-0 bg-secondary900 bg-opacity-60' />
 					</Transition.Child>
 
 					<div className='fixed inset-0'>

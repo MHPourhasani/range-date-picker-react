@@ -15,18 +15,12 @@ const weekStartDayIndex = 0;
 const DayPicker = ({
 	state,
 	onChange,
-	showOtherDays = false,
-	mapDays,
 	onlyShowInRangeDates,
-	customWeekDays,
 	sort,
 	numberOfMonths,
-	weekStartDayIndex,
 	handleFocusedDate,
-	hideWeekDays,
 	monthAndYears: [monthNames],
 	displayWeekNumbers,
-	weekNumber = '',
 	rangeHover,
 	todayStyle,
 	allDayStyles,
@@ -40,13 +34,16 @@ const DayPicker = ({
 			state,
 		mustShowDayPicker = !onlyMonthPicker && !onlyYearPicker,
 		[dateHovered, setDateHovered] = useState();
+		const weekDays = ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'];
+		const weekStartDayIndex = 0;
+
 
 	ref.current.date = date;
 
 	const months = useMemo(() => {
 		if (!mustShowDayPicker) return [];
 
-		return getMonths(ref.current.date, showOtherDays, numberOfMonths, weekStartDayIndex);
+		return getMonths(ref.current.date, numberOfMonths, weekStartDayIndex);
 		// eslint-disable-next-line
 	}, [
 		date.monthIndex,
@@ -54,12 +51,11 @@ const DayPicker = ({
 		date.calendar,
 		date.locale,
 		mustShowDayPicker,
-		showOtherDays,
 		numberOfMonths,
 		weekStartDayIndex,
 	]);
 
-	function getMonths(date, showOtherDays, numberOfMonths, weekStartDayIndex) {
+	function getMonths(date, numberOfMonths, weekStartDayIndex) {
 		if (!date) return [];
 
 		let months = [];
@@ -89,7 +85,7 @@ const DayPicker = ({
 
 				weeks.push(week);
 
-				if (weekIndex > 2 && date.monthIndex !== monthIndex && !showOtherDays) break;
+				if (weekIndex > 2 && date.monthIndex !== monthIndex) break;
 			}
 
 			months.push(weeks);
@@ -158,28 +154,9 @@ const DayPicker = ({
 	}
 
 	function getAllProps(object) {
-		if (!object.current && !showOtherDays) return {};
+		if (!object.current) return {};
 
 		let allProps = {};
-
-		mapDays.forEach((fn) => {
-			let props = fn({
-				date: object.date,
-				today,
-				currentMonth: state.date.month,
-				selectedDate: state.selectedDate,
-				isSameDate,
-			});
-
-			if (props?.constructor !== Object) props = {};
-			if (props.disabled || props.hidden) object.disabled = true;
-			if (props.hidden) object.hidden = true;
-
-			allProps = {
-				...allProps,
-				...props,
-			};
-		});
 
 		delete allProps.disabled;
 		delete allProps.hidden;
@@ -189,8 +166,6 @@ const DayPicker = ({
 
 	function mustDisplayDay(object) {
 		if (object.current) return true;
-
-		return showOtherDays;
 	}
 
 	function selectDay({ date: dateObject, current }, monthIndex, numberOfMonths) {
@@ -238,10 +213,8 @@ const DayPicker = ({
 				<div key={monthIndex}>
 					<WeekDays
 						state={state}
-						customWeekDays={customWeekDays}
+						customWeekDays={weekDays}
 						weekStartDayIndex={weekStartDayIndex}
-						displayWeekNumbers={displayWeekNumbers}
-						weekNumber={weekNumber}
 						className='mb-3 flex w-full items-center justify-between text-11 font-medium text-primary'
 					/>
 

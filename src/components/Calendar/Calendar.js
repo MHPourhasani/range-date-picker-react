@@ -25,7 +25,6 @@ function Calendar(
 		onChange,
 		minDate,
 		maxDate,
-		mapDays,
 		onReady,
 		onlyShowInRangeDates = true,
 		sort,
@@ -39,8 +38,6 @@ function Calendar(
 		onMonthChange,
 		onFocusedDateChange,
 		disabled,
-		hideWeekDays,
-		weekPicker,
 		rangeHover,
 		oneDaySelectStyle,
 		allDayStyles,
@@ -49,8 +46,6 @@ function Calendar(
 	},
 	outerRef
 ) {
-	const weekDays = ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'];
-	const weekStartDayIndex = 0;
 	const numberOfMonths = 2;
 
 	if (currentDate && !(currentDate instanceof DateObject)) {
@@ -60,7 +55,6 @@ function Calendar(
 	[calendar, locale] = check(calendar, locale);
 
 	format = getFormat(format);
-	mapDays = [].concat(mapDays).filter(Boolean);
 	/**
 	 * Each plugin can return several different plugins.
 	 * So in the first place, plugins might look like this:
@@ -206,9 +200,9 @@ function Calendar(
 		state.today && (
 			<section className='flex flex-col justify-center'>
 				<div
-					// rmdp-wrapper
+					// rmdp-calendar
 					ref={setRef}
-					className={`${calendarStyle} rmdp-calendar flex h-auto w-full flex-col p-1`}>
+					className={`rmdp-calendar flex w-full flex-col p-1 ${calendarStyle}`}>
 					<section>
 						<CalendarIcon />
 					</section>
@@ -217,12 +211,8 @@ function Calendar(
 
 					<DayPicker
 						{...globalProps}
-						mapDays={mapDays}
 						onlyShowInRangeDates={onlyShowInRangeDates}
-						customWeekDays={weekDays}
 						numberOfMonths={numberOfMonths}
-						weekStartDayIndex={weekStartDayIndex}
-						hideWeekDays={hideWeekDays}
 						oneDaySelectStyle={oneDaySelectStyle}
 						// dayStyles={dayStyles}
 						allDayStyles={allDayStyles}
