@@ -51,21 +51,6 @@ const App = () => {
 						/> */}
 					</div>
 
-					{/* <div className='flex flex-col items-stretch justify-between text-14'>
-						<span className='flex flex-col gap-3'>
-							{buttons.map((button, index) => (
-								<button
-									key={index}
-									className='w-44 rounded-[5px] border-1 border-secondary300 py-2 text-secondary800 hover:border-primary'>
-									{button}
-								</button>
-							))}
-						</span>
-
-						<button className='w-44 rounded-[5px] bg-secondary800 py-3 text-white'>
-							اعمال
-						</button>
-					</div> */}
 				</section>
 			</section>
 		</div>
