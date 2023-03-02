@@ -20,13 +20,12 @@ const buttons = [
 	'یک ساعت اخیر',
 	'دو ساعت اخیر',
 	'یک روز اخیر',
+	// { title: 'یک روز اخیر', onClick: ()=>  },
 	'بازه دلخواه',
 ];
 
 const Modal = ({ value, setValue }) => {
-	let [isOpen, setIsOpen] = useState(false),
-		calendar = persian,
-		locale = persian_fa;
+	let [isOpen, setIsOpen] = useState(false);
 
 	// const { dates } = useDates();
 
@@ -91,26 +90,24 @@ const Modal = ({ value, setValue }) => {
 										/>
 									</div>
 
-									<section className='flex items-start justify-between'>
+									<section className='flex items-start gap-10 justify-between'>
 										<Calendar
 											value={value}
 											onChange={setValue}
-											locale={locale}
-											calendar={calendar}
 											rangeHover
 											numberOfMonths={2}
 											maxDate={new Date()}
-											calendarStyle='w-auto h-auto flex justify-between items-center rounded-md text-center'
-											allDayStyles='w-12 h-12 flex justify-center items-center cursor-pointer text-black'
+											calendarStyle='flex items-center text-center'
+											allDayStyles='w-12 h-12 flex justify-center items-center cursor-pointer'
 											todayStyle='text-primary'
 											oneDaySelectStyle='text-black bg- rounde '
 											rangeDateStyle='bg-sky-200'
-											startRangeDayStyle='bg-primary text- rounded-r-md'
+											startRangeDayStyle='bg-primary rounded-r-md'
 											endRangeDayStyle='bg-primary '
 										/>
 
-										<div>
-											<span className='flex flex-col gap-3 text-14'>
+										<div className='text-14'>
+											<span className='flex flex-col gap-3'>
 												{buttons.map((button, index) => (
 													<button
 														key={index}

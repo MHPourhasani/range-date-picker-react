@@ -33,9 +33,8 @@ const DayPicker = ({
 			state,
 		mustShowDayPicker = !onlyMonthPicker && !onlyYearPicker,
 		[dateHovered, setDateHovered] = useState();
-		const weekDays = ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'];
-		const weekStartDayIndex = 0;
-
+	const weekDays = ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'];
+	const weekStartDayIndex = 0;
 
 	ref.current.date = date;
 
@@ -103,12 +102,10 @@ const DayPicker = ({
 			{ date, hidden, current } = object;
 
 		if (!mustDisplayDay(object) || hidden) {
-			//   names.push("rmdp-day-hidden");
-			names.push('text-secondary400');
+			names.push('text-secondary400'); // rmdp-day-hidden
 		} else {
 			if ((minDate && date < minDate) || (maxDate && date > maxDate) || object.disabled) {
-				// names.push("rmdp-disabled");
-				names.push('text-secondary400');
+				names.push('text-secondary400'); // rmdp-disabled
 
 				if (!object.disabled) object.disabled = true;
 			}
@@ -118,9 +115,7 @@ const DayPicker = ({
 			let mustDisplaySelectedDate = (numberOfMonths > 1 && current) || numberOfMonths === 1;
 
 			if (!object.disabled || !onlyShowInRangeDates) {
-				if (isSameDate(date, today)) names.push('rmdp-today');
-				// if (isSameDate(date, today)) names.push(todayStyle);
-				if (isSameDate(date, today)) return todayStyle;
+				if (isSameDate(date, today)) names.push('rmdp-today'); // todayStyle
 				if (isSelected(date) && mustDisplaySelectedDate && !range) {
 					names.push('rmdp-selected');
 				}
@@ -137,7 +132,6 @@ const DayPicker = ({
 						endRangeDayStyle
 					)
 				);
-				// console.log(startRangeDayStyle);
 
 				names = names.concat(
 					getRangeHoverClass(date, selectedDate, dateHovered, rangeHover)
@@ -206,7 +200,7 @@ const DayPicker = ({
 	return (
 		// کل تقویم به غیر از هدر
 		<div
-			className={`my-7 flex w-[336px] gap-8`}
+			className={`my-7 flex w gap-8`}
 			onMouseLeave={() => rangeHover && setDateHovered()}>
 			{months.map((weeks, monthIndex) => (
 				<div key={monthIndex}>

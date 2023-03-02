@@ -11,10 +11,8 @@ import ElementPopper from 'react-element-popper';
 import DateObject from 'react-date-object';
 import Calendar from '../Calendar/Calendar';
 import getFormat from '../../utils/getFormat';
-import stringify from '../../utils/stringify';
 import isArray from '../../utils/isArray';
 import check from '../../utils/check';
-import getLocaleName from '../../utils/getLocaleName';
 import toLocaleDigits from '../../common/toLocaleDigits';
 import './DatePicker.css';
 
@@ -28,7 +26,6 @@ function DatePicker(
 		onChange,
 		name,
 		required,
-		style = {},
 		className = '',
 		inputClass,
 		disabled,
@@ -37,7 +34,6 @@ function DatePicker(
 		months,
 		children,
 		inputMode,
-		scrollSensitive = true,
 		hideOnScroll,
 		minDate,
 		maxDate,
@@ -46,17 +42,14 @@ function DatePicker(
 		editable = true,
 		onOpen,
 		onClose,
-		arrowClassName = '',
 		zIndex = 100,
 		arrow = true,
 		fixMainPosition,
-		onPositionChange,
 		onPropsChange,
 		digits,
 		onFocusedDateChange,
 		type,
 		onOpenPickNewDate = true,
-		mobileButtons = [],
 		...otherProps
 	},
 	outerRef
@@ -260,9 +253,7 @@ function DatePicker(
 			active={isCalendarReady}
 			position={calendarPosition}
 			arrow={arrow}
-			fixMainPosition={!scrollSensitive || fixMainPosition}
 			zIndex={zIndex}
-			onChange={onPositionChange}
 			containerClassName={`rmdp-container ${containerClassName}`}
 			className='w-[395px]'
 			{...otherProps}
@@ -312,7 +303,6 @@ function DatePicker(
 					className={inputClass || 'rmdp-input'}
 					value={stringDate}
 					onChange={handleValueChange}
-					style={style}
 					disabled={disabled ? true : false}
 					inputMode={inputMode}
 				/>
@@ -342,30 +332,7 @@ function DatePicker(
 				onFocusedDateChange={handleFocusedDate}
 				{...otherProps}>
 				{children}
-				{renderButtons()}
 			</Calendar>
-		);
-	}
-
-	function isMobile() {
-		return typeof className === 'string' && className.includes('rmdp-mobile');
-	}
-
-	function renderButtons() {
-		let mustSetTopBorder = [].concat
-			.apply([], datePickerProps.plugins || [])
-			.some(({ props = {} }) => !props.disabled);
-
-		return (
-			isArray(mobileButtons) && (
-				<div className={`rmdp-action-buttons ${mustSetTopBorder ? 'rmdp-border-top' : ''}`}>
-					{mobileButtons.concat(buttons).map(({ label, ...props }, index) => (
-						<button key={index} {...props}>
-							{label}
-						</button>
-					))}
-				</div>
-			)
 		);
 	}
 

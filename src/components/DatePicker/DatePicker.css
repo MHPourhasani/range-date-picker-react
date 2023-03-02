@@ -78,40 +78,4 @@
   border: 1px solid #cfd8e2;
 }
 
-.rmdp-ep-arrow[direction="top"] {
-  border-bottom: 1px solid white;
-}
 
-.rmdp-ep-arrow[direction="left"] {
-  border-right: 1px solid white;
-}
-
-.rmdp-ep-arrow[direction="right"] {
-  border-left: 1px solid white;
-  margin-left: -1px;
-}
-
-.rmdp-ep-arrow[direction="bottom"] {
-  border-top: 1px solid white;
-  margin-top: -1.5px;
-}
-
-.rmdp-ep-arrow[direction="top"]::after {
-  left: 4px;
-  top: 5px;
-}
-
-.rmdp-ep-arrow[direction="bottom"]::after {
-  left: 4px;
-  top: -6px;
-}
-
-.rmdp-ep-arrow[direction="left"]::after {
-  left: 5px;
-  top: 3px;
-}
-
-.rmdp-ep-arrow[direction="right"]::after {
-  left: -6px;
-  top: 3px;
-}

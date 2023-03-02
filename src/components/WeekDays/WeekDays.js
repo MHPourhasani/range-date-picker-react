@@ -2,16 +2,14 @@ import React, { useMemo } from 'react';
 import isArray from '../../utils/isArray';
 import DateObject from 'react-date-object';
 
-export default function WeekDays({
+const WeekDays = ({
 	state: {
 		date: { calendar, locale },
 	},
 	customWeekDays,
 	weekStartDayIndex,
-	displayWeekNumbers,
-	weekNumber,
 	className,
-}) {
+}) => {
 	let weekDays = useMemo(() => {
 		let weekDays = customWeekDays;
 
@@ -51,4 +49,6 @@ export default function WeekDays({
 			))}
 		</div>
 	);
-}
+};
+
+export default WeekDays;

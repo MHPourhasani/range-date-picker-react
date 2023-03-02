@@ -5,9 +5,11 @@ import DateObject from 'react-date-object';
 import getFormat from '../../utils/getFormat';
 import toDateObject from '../../utils/toDateObject';
 import isArray from '../../utils/isArray';
-import check from '../../utils/check';
 import toLocaleDigits from '../../common/toLocaleDigits';
 import './Calendar.css';
+
+import persian from 'react-date-object/calendars/persian';
+import persian_fa from 'react-date-object/locales/persian_fa';
 
 // icons
 import { ReactComponent as CalendarIcon } from '../../assets/svg/calendar.svg';
@@ -15,10 +17,7 @@ import { ReactComponent as CalendarIcon } from '../../assets/svg/calendar.svg';
 function Calendar(
 	{
 		value,
-		calendar,
-		locale,
 		format,
-		className,
 		months,
 		children,
 		onChange,
@@ -48,19 +47,14 @@ function Calendar(
 	const numberOfMonths = 2,
 		range = true;
 
+	let calendar = persian,
+		locale = persian_fa;
+
 	if (currentDate && !(currentDate instanceof DateObject)) {
 		currentDate = undefined;
 	}
 
-	[calendar, locale] = check(calendar, locale);
-
 	format = getFormat(format);
-	/**
-	 * Each plugin can return several different plugins.
-	 * So in the first place, plugins might look like this:
-	 * [plugin1, [plugin2, plugin3], plugin4]
-	 * For this reason, we remove the extra arrays inside the plugins.
-	 */
 
 	let [state, setState] = useState({}),
 		listeners = {},
@@ -185,7 +179,6 @@ function Calendar(
 	}, [ref.current.isReady, onReady]);
 
 	let globalProps = {
-			value,
 			state,
 			setState,
 			onChange: handleChange,
@@ -198,31 +191,33 @@ function Calendar(
 
 	return (
 		state.today && (
-			<section className='flex flex-col justify-center'>
-				<div
-					// rmdp-calendar
-					ref={setRef}
-					className={`rmdp-calendar flex w-full flex-col p-1 ${calendarStyle}`}>
-					<section>
+			// rmdp-calendar
+			<section
+				ref={setRef}
+				className={`flex w-full flex-col justify-center p-1 ${calendarStyle}`}>
+				<section className='flex'>
+					<div className='flex gap-2 text-14'>
 						<CalendarIcon />
-					</section>
+						<span>از:</span>
+						<span>2200</span>
+					</div>
+				</section>
 
-					<Header {...globalProps} />
+				<Header {...globalProps} />
 
-					<DayPicker
-						{...globalProps}
-						onlyShowInRangeDates={onlyShowInRangeDates}
-						numberOfMonths={numberOfMonths}
-						oneDaySelectStyle={oneDaySelectStyle}
-						// dayStyles={dayStyles}
-						allDayStyles={allDayStyles}
-						todayStyle={todayStyle}
-						rangeDateStyle={rangeDateStyle}
-						startRangeDayStyle={startRangeDayStyle}
-						endRangeDayStyle={endRangeDayStyle}
-					/>
-					{children}
-				</div>
+				<DayPicker
+					{...globalProps}
+					onlyShowInRangeDates={onlyShowInRangeDates}
+					numberOfMonths={numberOfMonths}
+					oneDaySelectStyle={oneDaySelectStyle}
+					// dayStyles={dayStyles}
+					allDayStyles={allDayStyles}
+					todayStyle={todayStyle}
+					rangeDateStyle={rangeDateStyle}
+					startRangeDayStyle={startRangeDayStyle}
+					endRangeDayStyle={endRangeDayStyle}
+				/>
+				{children}
 			</section>
 		)
 	);

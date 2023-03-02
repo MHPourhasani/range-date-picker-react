@@ -10,17 +10,18 @@ import { ReactComponent as ArrowDown } from '../../assets/svg/arrow-down.svg';
 
 // styles
 import styles from './YearPicker.module.css';
+import { useEffect } from 'react';
 
 const YearPicker = ({ state, onChange, handleFocusedDate, onYearChange }) => {
-	const { date, today, minDate, maxDate, selectedDate, onlyShowInRangeDates, year } = state,
-		digits = date.digits;
+	const { date, today, minDate, maxDate, range, selectedDate, onlyShowInRangeDates, year } =
+			state,
+		digits = date.digits,
+		[yearHovered, setyearHovered] = useState();
 
 	const [selectedYear, setSelectedYear] = useState(today.year);
 	let minYear = today.year - 4;
 
 	minYear = minYear - 12 * Math.ceil((minYear - year) / 12);
-
-	console.log(state);
 
 	const notInRange = (year) => {
 		return (minDate && year < minDate.year) || (maxDate && year > maxDate.year);
@@ -30,7 +31,7 @@ const YearPicker = ({ state, onChange, handleFocusedDate, onYearChange }) => {
 		let years = [],
 			year = minYear;
 
-		for (var j = 0; j < 10; j++) {
+		for (let i = 0; i < 10; i++) {
 			years.push(year);
 			year++;
 		}
@@ -74,16 +75,35 @@ const YearPicker = ({ state, onChange, handleFocusedDate, onYearChange }) => {
 		return names.join(' ');
 	};
 
+	// useEffect(
+	// 	(e) => {
+	// 		if (selectedDate !== []) {
+	// 			//  selectedDate[0];
+	// 			setSelectedYear(selectedDate[0]);
+	// 		} else {
+	// 			setSelectedYear(e);
+	// 		}
+	// 	},
+	// 	[selectedDate]
+	// );
+
 	return (
 		<div>
 			<Listbox
-				value={selectedDate.year !== today.year ? selectedDate.year : selectedYear}
+				// value={
+				// 	selectedDate && selectedDate[0].year !== today.year
+				// 		? selectedDate.year
+				// 		: selectedYear
+				// }
 				onChange={(e) => setSelectedYear(e)}>
 				<Listbox.Button
-					value={selectedDate.year !== today.year ? selectedDate.year : selectedYear}
+					// value={
+					// 	selectedDate[0].year !== today.year ? selectedDate[0].year : selectedYear
+					// }
 					className='relative flex w-auto cursor-pointer items-center gap-5 bg-white py-2 text-15'>
 					<span>
-						{selectedDate.year !== today.year ? selectedDate.year : selectedYear}
+						{/* {selectedDate || selectedDate[0] ? selectedDate[0].year : today.year} */}
+						{selectedYear}
 					</span>
 					<ArrowDown />
 				</Listbox.Button>

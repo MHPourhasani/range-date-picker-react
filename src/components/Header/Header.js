@@ -53,7 +53,7 @@ const Header = ({
 							{month}
 						</span> */}
 					<MonthPicker state={state} onChange={onChange} />
-					<YearPicker state={state} onChange={onChange} />
+					<YearPicker state={state} onChange={onChange} value={value} />
 					{getButton('right')}
 				</div>
 			))}
