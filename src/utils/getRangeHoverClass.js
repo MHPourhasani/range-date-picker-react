@@ -1,10 +1,4 @@
-export default function getRangeHoverClass(
-	date,
-	selectedDate,
-	dateHovered,
-	rangeHover,
-	type = 'day'
-) {
+const getRangeHoverClass = (date, selectedDate, dateHovered, rangeHover, type = 'day') => {
 	const names = [];
 
 	if (rangeHover && selectedDate?.length === 1 && dateHovered) {
@@ -17,13 +11,15 @@ export default function getRangeHoverClass(
 			(strDay > strSelected && strDay <= strHovered) ||
 			(strDay < strSelected && strDay >= strHovered)
 		) {
-			names.push('rmdp-range-hover');
+			names.push('bg-secondary300'); // rmdp-range-hover
 
 			if (strDay === strHovered) {
-				names.push(strHovered > strSelected ? 'end bg-black' : 'start bg-black rounded-md');
+				names.push(strHovered > strSelected ? 'end bg-black' : 'start bg-black rounded-xl');
 			}
 		}
 	}
 
 	return names;
-}
+};
+
+export default getRangeHoverClass;

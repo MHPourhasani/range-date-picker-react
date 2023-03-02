@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Fragment, useState, useMemo } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 
@@ -9,8 +10,8 @@ import toLocaleDigits from '../../common/toLocaleDigits';
 import { ReactComponent as ArrowDown } from '../../assets/svg/arrow-down.svg';
 
 // styles
-import styles from './YearPicker.module.css';
-import { useEffect } from 'react';
+import styles from '../../styles/scrollbar.module.css';
+
 
 const YearPicker = ({ state, onChange, handleFocusedDate, onYearChange }) => {
 	const { date, today, minDate, maxDate, range, selectedDate, onlyShowInRangeDates, year } =
@@ -75,17 +76,7 @@ const YearPicker = ({ state, onChange, handleFocusedDate, onYearChange }) => {
 		return names.join(' ');
 	};
 
-	// useEffect(
-	// 	(e) => {
-	// 		if (selectedDate !== []) {
-	// 			//  selectedDate[0];
-	// 			setSelectedYear(selectedDate[0]);
-	// 		} else {
-	// 			setSelectedYear(e);
-	// 		}
-	// 	},
-	// 	[selectedDate]
-	// );
+	console.log(selectedDate);
 
 	return (
 		<div>
@@ -102,8 +93,13 @@ const YearPicker = ({ state, onChange, handleFocusedDate, onYearChange }) => {
 					// }
 					className='relative flex w-auto cursor-pointer items-center gap-5 bg-white py-2 text-15'>
 					<span>
-						{/* {selectedDate || selectedDate[0] ? selectedDate[0].year : today.year} */}
-						{selectedYear}
+						{/* {selectedDate[0] ? selectedDate[0].year : selectedYear} */}
+						{selectedDate.map((date) => {
+							return date.year;
+						}) !== today.year
+							? selectedDate.year
+							: selectedYear}
+						{/* {selectedYear} */}
 					</span>
 					<ArrowDown />
 				</Listbox.Button>

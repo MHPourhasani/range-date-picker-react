@@ -3,7 +3,6 @@ import YearPicker from '../YearPicker/YearPicker';
 import MonthPicker from '../MonthPicker/MonthPicker';
 
 const Header = ({
-	value,
 	state,
 	setState,
 	handleMonthChange,
@@ -11,14 +10,7 @@ const Header = ({
 	onChange,
 	monthAndYears: [months, years],
 }) => {
-	let {
-			date,
-			mustShowYearPicker,
-			minDate,
-			maxDate,
-			year,
-			today,
-		} = state,
+	let { date, mustShowYearPicker, minDate, maxDate, year, today } = state,
 		isPreviousDisable =
 			minDate && date.year <= minDate.year && minDate.monthIndex > date.monthIndex - 1,
 		isNextDisable =
@@ -52,8 +44,12 @@ const Header = ({
 					{/* <span className={`flex w-32 cursor-pointer items-center justify-between`}>
 							{month}
 						</span> */}
-					<MonthPicker state={state} onChange={onChange} />
-					<YearPicker state={state} onChange={onChange} value={value} />
+					<MonthPicker
+						state={state}
+						onChange={onChange}
+						handleMonthChange={handleMonthChange}
+					/>
+					<YearPicker state={state} onChange={onChange} />
 					{getButton('right')}
 				</div>
 			))}

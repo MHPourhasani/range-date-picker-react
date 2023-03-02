@@ -203,7 +203,7 @@ function Calendar(
 					</div>
 				</section>
 
-				<Header {...globalProps} />
+				<Header {...globalProps} handleMonthChange={handleMonthChange}/>
 
 				<DayPicker
 					{...globalProps}

@@ -1,14 +1,14 @@
 import isSameDate from './isSameDate';
 
-export default function getRangeClass(
+const getRangeClass = (
 	date,
 	selectedDate,
 	// checkMonth,
 	// oneDaySelectStyle,
-	rangeDateStyle,
-	startRangeDayStyle,
-	endRangeDayStyle
-) {
+	// rangeDateStyle,
+	// startRangeDayStyle,
+	// endRangeDayStyle
+) => {
 	let first = selectedDate[0],
 		second = selectedDate[1],
 		names = [];
@@ -40,4 +40,6 @@ export default function getRangeClass(
 	}
 
 	return names.join(' ');
-}
+};
+
+export default getRangeClass;

@@ -3,12 +3,14 @@ import { useState } from 'react';
 import DatePicker from './components/DatePicker/DatePicker';
 import Calendar from './components/Calendar/Calendar';
 import Modal from './Modal';
+import DateObject from 'react-date-object';
 
 const App = () => {
-	const [value, setValue] = useState({
-		startDate: new Date(),
-		endDate: new Date(),
-	});
+	// const [value, setValue] = useState({
+	// 	startDate: new Date(),
+	// 	endDate: new Date(),
+	// });
+	const [value, setValue] = useState([null, null]);
 
 	const buttons = [
 		'5 دقیقه اخیر',
@@ -23,7 +25,7 @@ const App = () => {
 	return (
 		<div
 			dir='rtl'
-			className='flex h-screen w-full flex-col items-center justify-center bg- font-iranyekan'>
+			className='bg- flex h-screen w-full flex-col items-center justify-center font-iranyekan'>
 			<section className='rounded-xl bg-white px-6 py-2'>
 				<Modal value={value} setValue={setValue} />
 
@@ -50,7 +52,6 @@ const App = () => {
 							// endRangeDayStyle='bg-primary'
 						/> */}
 					</div>
-
 				</section>
 			</section>
 		</div>
