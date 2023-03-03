@@ -14,7 +14,7 @@ import styles from '../../styles/scrollbar.module.css';
 
 
 const YearPicker = ({ state, onChange, handleFocusedDate, onYearChange }) => {
-	const { date, today, minDate, maxDate, range, selectedDate, onlyShowInRangeDates, year } =
+	const { date, today, minDate, maxDate, selectedDate, onlyShowInRangeDates, year } =
 			state,
 		digits = date.digits,
 		[yearHovered, setyearHovered] = useState();
@@ -94,12 +94,12 @@ const YearPicker = ({ state, onChange, handleFocusedDate, onYearChange }) => {
 					className='relative flex w-auto cursor-pointer items-center gap-5 bg-white py-2 text-15'>
 					<span>
 						{/* {selectedDate[0] ? selectedDate[0].year : selectedYear} */}
-						{selectedDate.map((date) => {
+						{/* {selectedDate.map((date) => {
 							return date.year;
 						}) !== today.year
 							? selectedDate.year
-							: selectedYear}
-						{/* {selectedYear} */}
+							: selectedYear} */}
+						{selectedYear}
 					</span>
 					<ArrowDown />
 				</Listbox.Button>

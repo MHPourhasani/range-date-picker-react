@@ -22,22 +22,13 @@ const MonthPicker = ({
 	handleFocusedDate,
 	rangeHover,
 }) => {
-	const {
-			date,
-			today,
-			minDate,
-			maxDate,
-			calendar,
-			locale,
-			selectedDate,
-			range,
-			onlyShowInRangeDates,
-		} = state,
-		mustShowMonthPicker = state.mustShowMonthPicker,
+	const { date, today, minDate, maxDate, calendar, locale, selectedDate, onlyShowInRangeDates } =
+			state,
 		[dateHovered, setDateHovered] = useState();
 
-	const [selectedMonth, setSelectedMonth] = useState(today.month.name);
-	console.log(today);
+	// const [selectedMonth, setSelectedMonth] = useState(today.month.name);
+	const [selectedMonth, setSelectedMonth] = useState(new DateObject({ calendar: calendar }).month.name);
+	console.log(new DateObject({ calendar: calendar }));
 
 	const months = useMemo(() => {
 		let months = [],
@@ -146,8 +137,7 @@ const MonthPicker = ({
 		<div>
 			<Listbox
 				value={selectedDate.month !== today.month ? selectedDate.month : selectedMonth}
-				// onChange={(e) => setSelectedMonth(e)}
-				onChange={(e) => console.log(e)}>
+				onChange={(e) => setSelectedMonth(e)}>
 				<Listbox.Button
 					value={selectedDate.month !== today.month ? selectedDate.month : selectedMonth}
 					className='relative flex w-auto cursor-pointer items-center gap-5 bg-white py-2 text-15'>

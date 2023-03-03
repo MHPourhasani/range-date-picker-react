@@ -1,7 +1,5 @@
-export default function getFormat(onlyMonthPicker, onlyYearPicker, format) {
-  if (format) return format;
-  if (onlyMonthPicker) return "MM/YYYY";
-  if (onlyYearPicker) return "YYYY";
+export default function getFormat(format) {
+	if (format) return format;
 
-  return "YYYY/MM/DD";
+	return 'YYYY/MM/DD';
 }

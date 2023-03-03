@@ -12,7 +12,6 @@ import DateObject from 'react-date-object';
 import Calendar from '../Calendar/Calendar';
 import getFormat from '../../utils/getFormat';
 import isArray from '../../utils/isArray';
-import check from '../../utils/check';
 import toLocaleDigits from '../../common/toLocaleDigits';
 import './DatePicker.css';
 
@@ -105,8 +104,6 @@ function DatePicker(
 		locale = persian_fa;
 
 	format = getFormat(format);
-
-	[calendar, locale] = check(calendar, locale);
 
 	useEffect(() => {
 		function handleClickOutside(event) {
