@@ -149,13 +149,6 @@
 	/* border-radius: 0 0 5px 5px; */
 }
 
-.only.rmdp-month-picker,
-.only.rmdp-year-picker {
-	position: static;
-	width: 250px;
-	height: 240px;
-}
-
 /* .rmdp-header-values {
   color: black;
   margin: auto;
@@ -175,33 +168,6 @@
   width: 3px;
   margin-top: 5px;
 } */
-
-.rmdp-right i {
-	transform: rotate(-45deg);
-	-webkit-transform: rotate(-45deg);
-	margin-right: 3px;
-}
-
-.rmdp-left i {
-	transform: rotate(135deg);
-	-webkit-transform: rotate(135deg);
-	margin-left: 3px;
-}
-
-.rmdp-left,
-.rmdp-right {
-	position: absolute;
-	top: 54%;
-	transform: translateY(-50%);
-}
-
-.rmdp-left {
-	left: 0;
-}
-
-.rmdp-right {
-	right: 0;
-}
 
 .rmdp-arrow-container {
 	/* cursor: pointer; */
@@ -236,66 +202,6 @@
 .rmdp-arrow-container.disabled:hover .rmdp-arrow {
 	border: solid gray;
 	border-width: 0 2px 2px 0;
-}
-
-.rmdp-rtl {
-	direction: rtl;
-}
-
-.rmdp-rtl .rmdp-left i {
-	transform: rotate(-45deg);
-	-webkit-transform: rotate(-45deg);
-	margin-left: 0;
-	margin-right: 3px;
-}
-
-.rmdp-rtl .rmdp-right i {
-	transform: rotate(135deg);
-	-webkit-transform: rotate(135deg);
-	margin-right: 0;
-	margin-left: 3px;
-}
-
-.rmdp-rtl .rmdp-right {
-	right: auto;
-	left: 0;
-}
-
-.rmdp-rtl .rmdp-left {
-	left: auto;
-	right: 0;
-}
-
-.rmdp-rtl .rmdp-range.start,
-.rmdp-rtl .rmdp-range-hover.start {
-	border-top-left-radius: unset;
-	border-bottom-left-radius: unset;
-	border-top-right-radius: 50%;
-	border-bottom-right-radius: 50%;
-}
-
-.rmdp-rtl .rmdp-range.end,
-.rmdp-rtl .rmdp-range-hover.end {
-	border-top-right-radius: unset;
-	border-bottom-right-radius: unset;
-	border-top-left-radius: 50%;
-	border-bottom-left-radius: 50%;
-}
-
-.rmdp-rtl .rmdp-range.start.end {
-	border-radius: 50%;
-}
-
-.rmdp-rtl .rmdp-ym .rmdp-range.start,
-.rmdp-rtl .rmdp-ym .rmdp-range-hover.start {
-	border-top-right-radius: 15px;
-	border-bottom-right-radius: 15px;
-}
-
-.rmdp-rtl .rmdp-ym .rmdp-range.end,
-.rmdp-rtl .rmdp-ym .rmdp-range-hover.end {
-	border-top-left-radius: 15px;
-	border-bottom-left-radius: 15px;
 }
 
 .rmdp-day-hidden,

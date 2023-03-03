@@ -27,8 +27,10 @@ const MonthPicker = ({
 		[dateHovered, setDateHovered] = useState();
 
 	// const [selectedMonth, setSelectedMonth] = useState(today.month.name);
-	const [selectedMonth, setSelectedMonth] = useState(new DateObject({ calendar: calendar }).month.name);
-	console.log(new DateObject({ calendar: calendar }));
+	const [selectedMonth, setSelectedMonth] = useState(
+		new DateObject({ calendar: calendar }).month.name
+	);
+	console.log(selectedMonth);
 
 	const months = useMemo(() => {
 		let months = [],
@@ -52,7 +54,6 @@ const MonthPicker = ({
 		}
 
 		let array = [];
-
 		for (let i = 0; i < 12; i++) {
 			array.push({
 				date: new DateObject(date),
@@ -67,6 +68,7 @@ const MonthPicker = ({
 
 		return monthsArray;
 	}, [calendar, locale, state.date.year, state.date._format]);
+	console.log(months);
 
 	const selectMonth = (dateObject) => {
 		let { selectedDate, focused } = state,
@@ -131,7 +133,7 @@ const MonthPicker = ({
 		return names.join(' ');
 	};
 
-	console.log(date.name);
+	// console.log(date.name);
 
 	return (
 		<div>
@@ -157,7 +159,7 @@ const MonthPicker = ({
 					<Listbox.Options className='absolute h-60 w-36 overflow-y-scroll rounded-md border-1 border-secondary300 bg-white py-1 text-15 shadow-calendar focus:outline-none'>
 						{months.map((array, i) => (
 							// rmdp-ym
-							<div key={i} className='text-14'>
+							<div key={i} className='flex flex-col gap-2.5 text-14'>
 								{array.map(({ date, name }, j) => (
 									<Listbox.Option
 										key={j}
@@ -167,7 +169,7 @@ const MonthPicker = ({
 										onMouseEnter={() => rangeHover && setDateHovered(date)}
 										// disabled={notInRange(month)}
 										className={({ active }) =>
-											` flex cursor-pointer select-none flex-col items-start py-2 pr-4 disabled:text-secondary400 ${
+											` flex cursor-pointer select-none flex-col items-start py-2.5 pr-4 disabled:text-secondary400 ${
 												active ? 'text-primary' : 'text-secondary800'
 											}`
 										}>

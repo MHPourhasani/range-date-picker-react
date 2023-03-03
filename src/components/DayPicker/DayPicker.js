@@ -7,7 +7,6 @@ import getRangeClass from '../../utils/getRangeClass';
 import getRangeHoverClass from '../../utils/getRangeHoverClass';
 import { useState } from 'react';
 import getAllDatesInRange from '../../utils/getAllDatesInRange';
-import getStartDayInRange from '../../utils/getStartDayInRange';
 
 const weekDays = ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'];
 const weekStartDayIndex = 0;

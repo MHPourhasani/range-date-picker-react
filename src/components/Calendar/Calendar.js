@@ -2,7 +2,6 @@ import { useState, useEffect, forwardRef, useRef } from 'react';
 import DayPicker from '../DayPicker/DayPicker';
 import Header from '../Header/Header';
 import DateObject from 'react-date-object';
-import getFormat from '../../utils/getFormat';
 import toDateObject from '../../utils/toDateObject';
 import isArray from '../../utils/isArray';
 import toLocaleDigits from '../../common/toLocaleDigits';
@@ -14,38 +13,29 @@ import persian_fa from 'react-date-object/locales/persian_fa';
 // icons
 import { ReactComponent as CalendarIcon } from '../../assets/svg/calendar.svg';
 
-function Calendar(
-	{
-		value,
-		format,
-		months,
-		children,
-		onChange,
-		minDate,
-		maxDate,
-		onReady,
-		onlyShowInRangeDates = true,
-		sort,
-		dayStyles,
-		todayStyle,
-		calendarStyle,
-		rangeDateStyle,
-		currentDate,
-		digits,
-		onPropsChange,
-		onMonthChange,
-		onFocusedDateChange,
-		disabled,
-		rangeHover,
-		oneDaySelectStyle,
-		allDayStyles,
-		startRangeDayStyle,
-		endRangeDayStyle,
-	},
-	outerRef
-) {
+function Calendar({
+	value,
+	children,
+	onChange,
+	minDate,
+	maxDate,
+	onReady,
+	sort,
+	todayStyle,
+	calendarStyle,
+	rangeDateStyle,
+	currentDate,
+	onMonthChange,
+	onFocusedDateChange,
+	rangeHover,
+	oneDaySelectStyle,
+	allDayStyles,
+	startRangeDayStyle,
+	endRangeDayStyle,
+}) {
 	const numberOfMonths = 2,
-		range = true;
+		range = true,
+		onlyShowInRangeDates = true;
 
 	let calendar = persian,
 		locale = persian_fa;
@@ -53,8 +43,6 @@ function Calendar(
 	if (currentDate && !(currentDate instanceof DateObject)) {
 		currentDate = undefined;
 	}
-
-	format = getFormat(format);
 
 	let [state, setState] = useState({}),
 		listeners = {},
@@ -69,9 +57,6 @@ function Calendar(
 				if (!date) return;
 				if (date.calendar.name !== calendar.name) date.setCalendar(calendar);
 				if (date.locale.name !== locale.name) date.setLocale(locale);
-				if (date._format !== format) date.setFormat(format);
-
-				date.digits = digits;
 
 				return date;
 			}
@@ -81,10 +66,10 @@ function Calendar(
 			}
 
 			if (!value) {
-				if (!date) date = getDate({ calendar, locale, format });
+				if (!date) date = getDate({ calendar, locale });
 				if (initialValue) selectedDate = undefined;
 			} else {
-				selectedDate = getSelectedDate(value, calendar, locale, format);
+				selectedDate = getSelectedDate(value, calendar, locale);
 
 				if (isArray(selectedDate)) {
 					if (!date) date = getDate(selectedDate[0]);
@@ -138,22 +123,21 @@ function Calendar(
 				focused,
 				calendar,
 				locale,
-				format,
 				mustSortDates,
 				year: date.year,
 				today: state.today || new DateObject({ calendar }),
 			};
 		});
-	}, [value, calendar, locale, format, range, sort, numberOfMonths, digits]);
+	}, [value, calendar, locale, range, sort, numberOfMonths]);
 
 	useEffect(() => {
 		if (!minDate && !maxDate) return;
 
 		setState((state) => {
-			let { calendar, locale, format } = state;
+			let { calendar, locale } = state;
 
 			let [selectedDate, $minDate, $maxDate] = getDateInRangeOfMinAndMaxDate(
-				getSelectedDate(value, calendar, locale, format),
+				getSelectedDate(value, calendar, locale),
 				minDate,
 				maxDate,
 				calendar
@@ -203,14 +187,13 @@ function Calendar(
 					</div>
 				</section>
 
-				<Header {...globalProps} handleMonthChange={handleMonthChange}/>
+				<Header {...globalProps} handleMonthChange={handleMonthChange} />
 
 				<DayPicker
 					{...globalProps}
 					onlyShowInRangeDates={onlyShowInRangeDates}
 					numberOfMonths={numberOfMonths}
 					oneDaySelectStyle={oneDaySelectStyle}
-					// dayStyles={dayStyles}
 					allDayStyles={allDayStyles}
 					todayStyle={todayStyle}
 					rangeDateStyle={rangeDateStyle}
@@ -223,7 +206,6 @@ function Calendar(
 	);
 
 	function handleChange(selectedDate, state) {
-		if (disabled) return;
 		//This one must be done before setState
 		if (selectedDate || selectedDate === null) {
 			if (listeners.change) listeners.change.forEach((callback) => callback(selectedDate));
@@ -231,28 +213,9 @@ function Calendar(
 
 		if (state) setState(state);
 		if (selectedDate || selectedDate === null) onChange?.(selectedDate);
-
-		handlePropsChange({ value: selectedDate });
-	}
-
-	function handlePropsChange(props = {}) {
-		if (disabled) return;
-
-		let allProps = {
-			...calendarProps,
-			...datePickerProps,
-			...props,
-			value: props.value ?? state.selectedDate,
-		};
-
-		delete allProps.onPropsChange;
-
-		onPropsChange?.(allProps);
 	}
 
 	function handleFocusedDate(focused, clicked) {
-		if (disabled) return;
-
 		onFocusedDateChange?.(focused, clicked);
 	}
 
@@ -271,8 +234,6 @@ function Calendar(
 			element.date = state.date;
 
 			element.set = function (key, value) {
-				if (disabled) return;
-
 				setState({
 					...state,
 					date: new DateObject(state.date.set(key, value)),
@@ -281,9 +242,6 @@ function Calendar(
 		}
 
 		ref.current.Calendar = element;
-
-		if (outerRef instanceof Function) return outerRef(element);
-		if (outerRef) outerRef.current = element;
 	}
 
 	function getMonthsAndYears() {
@@ -305,13 +263,7 @@ function Calendar(
 				year++;
 			}
 
-			if (isArray(months) && months.length >= 12) {
-				let month = months[index];
-
-				monthName = isArray(month) ? month[0] : month;
-			} else {
-				monthName = date.months[index].name;
-			}
+			monthName = date.months[index].name;
 
 			year = toLocaleDigits(year.toString(), digits);
 
@@ -353,14 +305,14 @@ function getDateInRangeOfMinAndMaxDate(date, minDate, maxDate, calendar) {
 	return [date, minDate, maxDate];
 }
 
-function getSelectedDate(value, calendar, locale, format) {
+function getSelectedDate(value, calendar, locale) {
 	let selectedDate = []
 		.concat(value)
 		.map((date) => {
 			if (!date) return {};
 			if (date instanceof DateObject) return date;
 
-			return new DateObject({ date, calendar, locale, format });
+			return new DateObject({ date, calendar, locale });
 		})
 		.filter((date) => date.isValid);
 

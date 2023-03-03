@@ -12,12 +12,9 @@ import { ReactComponent as ArrowDown } from '../../assets/svg/arrow-down.svg';
 // styles
 import styles from '../../styles/scrollbar.module.css';
 
-
 const YearPicker = ({ state, onChange, handleFocusedDate, onYearChange }) => {
-	const { date, today, minDate, maxDate, selectedDate, onlyShowInRangeDates, year } =
-			state,
-		digits = date.digits,
-		[yearHovered, setyearHovered] = useState();
+	const { date, today, minDate, maxDate, selectedDate, onlyShowInRangeDates, year } = state,
+		digits = date.digits;
 
 	const [selectedYear, setSelectedYear] = useState(today.year);
 	let minYear = today.year - 4;
@@ -76,8 +73,6 @@ const YearPicker = ({ state, onChange, handleFocusedDate, onYearChange }) => {
 		return names.join(' ');
 	};
 
-	console.log(selectedDate);
-
 	return (
 		<div>
 			<Listbox
@@ -110,7 +105,7 @@ const YearPicker = ({ state, onChange, handleFocusedDate, onYearChange }) => {
 					leaveFrom='opacity-100'
 					leaveTo='opacity-0'
 					className={styles.scrollbar_hidden}>
-					<Listbox.Options className='absolute h-60 w-36 overflow-y-scroll rounded-md border-1 border-secondary300 bg-white py-1 text-15 shadow-calendar focus:outline-none'>
+					<Listbox.Options className='absolute h-60 w-36 overflow-y-scroll rounded-md border-1 border-secondary300 bg-white py-1 text-15 shadow-calendar outline-none'>
 						{years.map((year) => (
 							<Listbox.Option
 								key={year}

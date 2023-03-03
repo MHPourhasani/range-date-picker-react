@@ -3,7 +3,7 @@ import { ReactComponent as ArrowRight } from '../../assets/svg/arrow-right.svg';
 const Arrow = ({ direction, onClick, disabled }) => {
 	return (
 		<span
-			className={`flex cursor-pointer items-center justify-center rounded-full hover:text-primary ${direction} ${
+			className={`flex cursor-pointer items-center justify-center rounded-full hover:text-primary ${
 				disabled ? 'text-secondary400' : ''
 			}`}
 			onClick={onClick}>
